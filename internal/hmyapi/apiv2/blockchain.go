@@ -735,12 +735,12 @@ func (s *PublicBlockChainAPI) GetSuperCommittees() (*quorum.Transition, error) {
 }
 
 // GetTotalSupply ..
-func (s *PublicBlockChainAPI) GetTotalSupply() numeric.Dec {
-	return numeric.NewDec(initSupply)
+func (s *PublicBlockChainAPI) GetTotalSupply() (numeric.Dec, error) {
+	return numeric.NewDec(initSupply), nil
 }
 
 // GetCirculatingSupply ..
-func (s *PublicBlockChainAPI) GetCirculatingSupply() numeric.Dec {
+func (s *PublicBlockChainAPI) GetCirculatingSupply() (numeric.Dec, error) {
 	timestamp := time.Now()
-	return numeric.NewDec(initSupply).Mul(reward.PercentageForTimeStamp(timestamp.Unix()))
+	return numeric.NewDec(initSupply).Mul(reward.PercentageForTimeStamp(timestamp.Unix())), nil
 }
